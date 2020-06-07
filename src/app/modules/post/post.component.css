@@ -1,3 +1,33 @@
-.container {
+.container {    
     margin-top: 20px;
+}
+
+.container h4 {
+    margin-left: 200px;
+    margin-bottom: 60px;
+ }
+
+.container textarea {
+   height: 60px; 
+}
+
+.btn-primary {
+    margin-top: 20px;
+}
+
+.list-group {
+    margin-top: 40px;
+    width: 550px;
+    
+}
+
+.list-content li {
+    height: 80px;
+    margin: 2px;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    color: white;
+}
+
+.menu-content {
+    border-right: 2px solid rgba(0, 0, 0, 0.8);
 }
