@@ -16,8 +16,16 @@
             <form #fPost="ngForm" [formGroup]="postForm" (submit)="ngSubmit(fPost)">
                 <div class="row">
                     <div class="col-sm">
-                        <textarea formControlName="text" class="form-control" name="" id="" cols="30"
+                        <textarea formControlName="description" class="form-control" name="description" id="description" cols="30"
                             rows="10"></textarea>
+                        <div class="error-msg" *ngIf="postForm.get('description')?.errors && submitted">
+                            <p class="alert alert-danger move-message-danger" *ngIf="postForm.get('description')?.errors?.required">
+                                Please, introduce a valid Move
+                            </p>
+                            <p class="alert alert-danger move-message-danger" *ngIf="postForm.get('description')?.errors?.pattern">
+                                Please, introduce a valid Move N S O E
+                            </p>                    
+                        </div>
                     </div>
                     <div class="col-sm">
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -25,10 +33,8 @@
                 </div>
             </form>
             <div class="row">
-                <div class="col-sm list-content">
-                    <ul class="list-group list-group-flush">
-                        <li *ngFor="let post of posts | async" class="list-group-item">{{post.text}}</li>
-                    </ul>
+                <div class="col-sm">
+                    <app-post-list class="list-group" [posts]="posts"></app-post-list>
                 </div>
             </div>
         </div>

@@ -5,29 +5,28 @@
 .container h4 {
     margin-left: 200px;
     margin-bottom: 60px;
+    text-decoration: underline;
  }
 
 .container textarea {
-   height: 60px; 
+   height: 60px;
+   border: 2px solid black;
 }
 
 .btn-primary {
     margin-top: 20px;
 }
 
+.menu-content {
+    border-right: 2px dotted rgba(0, 0, 0, 0.8);
+}
+
 .list-group {
     margin-top: 40px;
     width: 550px;
-    
+    height: 1vh;
 }
 
-.list-content li {
-    height: 80px;
-    margin: 2px;
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-    color: white;
-}
-
-.menu-content {
-    border-right: 2px solid rgba(0, 0, 0, 0.8);
+.error-msg {
+    margin-top: 5px;
 }

@@ -22,8 +22,18 @@ export class PostService {
     private http: HttpClient
   ) { }
 
-  getAll(): Observable<Post> {
-    return this.http.get<any>(`${this.url}/api/posts`)
+  save(post: Post): Observable<Post> {
+    return this.http.post<Post>(`${this.url}/api/posts`, post, httpOptions)
+    .pipe(
+      catchError(err => {
+        console.log('login error: ', err);
+        return throwError(err);
+      })
+    );
+  }
+
+  getAll(): Observable<Post[]> {
+    return this.http.get<any>(`${this.url}/api/posts`, httpOptions)
     .pipe(
       catchError(err => {
         console.log('login error: ', err);
