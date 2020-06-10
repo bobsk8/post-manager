@@ -22,8 +22,8 @@ export class PostComponent implements OnInit, OnDestroy {
     private postService: PostService,
     private fb: FormBuilder
   ) { }
-  
-  ngOnInit() {    
+
+  ngOnInit() {
     this.postForm = this.createForm();
     this.getPosts();
   }
@@ -40,15 +40,15 @@ export class PostComponent implements OnInit, OnDestroy {
       return;
     }
     const post = Object.assign(new Post(), form.value);
-    this.save(post, form); 
+    this.save(post, form);
   }
 
   save(post: Post, form: any): void {
     this.subs.sink = this.postService.save(post)
-    .subscribe(() => {
-      this.clearForm(form);     
-      this.getPosts();
-    });
+      .subscribe(() => {
+        this.clearForm(form);
+        this.getPosts();
+      });
   }
 
   clearForm(form: any): void {
@@ -59,7 +59,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
   getPosts(): void {
     this.subs.sink = this.postService.getAll()
-    .subscribe(resp => this.posts = resp);
+      .subscribe(resp => this.posts = resp);
   }
 
   ngOnDestroy(): void {

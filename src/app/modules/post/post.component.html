@@ -5,27 +5,16 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-2 menu-content">
-            <div class="row">
-                <div class="col-sm">
-                    <app-menu></app-menu>
-                </div>
-            </div>
-        </div>
         <div class="col-sm-10">
             <form #fPost="ngForm" [formGroup]="postForm" (submit)="ngSubmit(fPost)">
                 <div class="row">
                     <div class="col-sm">
-                        <textarea formControlName="description" class="form-control" name="description" id="description" cols="30"
-                            rows="10"></textarea>
-                        <div class="error-msg" *ngIf="postForm.get('description')?.errors && submitted">
-                            <p class="alert alert-danger move-message-danger" *ngIf="postForm.get('description')?.errors?.required">
-                                Please, introduce a valid Move
-                            </p>
-                            <p class="alert alert-danger move-message-danger" *ngIf="postForm.get('description')?.errors?.pattern">
-                                Please, introduce a valid Move N S O E
-                            </p>                    
-                        </div>
+                        <label for="description">Text</label>
+                        <textarea formControlName="description" class="form-control" name="description" id="description"
+                            cols="30" rows="10"></textarea>
+                        <app-error-message [haveErrors]="postForm.get('description')?.errors && submitted"
+                            [isRequired]="postForm.get('description')?.errors?.required" [type]="'text'">
+                        </app-error-message>
                     </div>
                     <div class="col-sm">
                         <button type="submit" class="btn btn-primary">Submit</button>

@@ -4,33 +4,52 @@
             <h4>Página administrativa</h4>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-2 menu-content">
-            <div class="row">
-                <div class="col-sm">
-                    <app-menu></app-menu>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="col-sm-10">
-            <form #fPost="ngForm" [formGroup]="postForm" (submit)="ngSubmit(fPost)">
+    <div class="row">        
+        <div class="col-sm-10">
+            <form #fEmployee="ngForm" [formGroup]="employeeForm" (submit)="ngSubmit(fEmployee)">
                 <div class="row">
                     <div class="col-sm">
-                        <textarea formControlName="text" class="form-control" name="" id="" cols="30"
-                            rows="10"></textarea>
-                    </div>
+                        <label for="username">Username</label>
+                        <input type="text" formControlName="username" class="form-control" name="username" id="username">
+                        <app-error-message [haveErrors]="employeeForm.get('username')?.errors && submitted"
+                            [isRequired]="employeeForm.get('username')?.errors?.required" [type]="'Username'"
+                            [havePattern]="employeeForm.get('username')?.errors?.pattern">
+                        </app-error-message>                        
+                    </div>                    
+                </div>
+                <div class="row">
                     <div class="col-sm">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+                        <label for="phone">Phone</label>
+                        <input type="text" formControlName="phone" class="form-control" name="phone" id="phone">
+                        <app-error-message [haveErrors]="employeeForm.get('phone')?.errors && submitted"
+                            [isRequired]="employeeForm.get('phone')?.errors?.required" [type]="'Phone'">
+                        </app-error-message>
+                    </div>                    
                 </div>
-            </form>
-            <div class="row">
-                <div class="col-sm list-content">
-                    <ul class="list-group list-group-flush">
-                        <li *ngFor="let post of posts | async" class="list-group-item">{{post.text}}</li>
-                    </ul>
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="role">Role</label>
+                        <input type="text" formControlName="role" class="form-control" name="role" id="role">
+                        <app-error-message [haveErrors]="employeeForm.get('role')?.errors && submitted"
+                            [isRequired]="employeeForm.get('role')?.errors?.required" [type]="'Role'">
+                        </app-error-message>
+                    </div>                    
                 </div>
-            </div>
-        </div> -->
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="name">Name</label>
+                        <input type="text" formControlName="name" class="form-control" name="name" id="name">
+                        <app-error-message [haveErrors]="employeeForm.get('name')?.errors && submitted"
+                            [isRequired]="employeeForm.get('name')?.errors?.required" [type]="'Name'">
+                        </app-error-message>
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <button class="btn btn-primary">Enviar</button>
+                    </div>                    
+                </div>
+            </form>            
+        </div>
     </div>
 </div>

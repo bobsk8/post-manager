@@ -1,0 +1,22 @@
+.container a {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.content-page {    
+    margin-top: 20px;
+}
+
+.menu-link {
+    border-bottom: 2px groove rgb(206, 166, 197);
+}
+
+.menu-content {
+    border-right: 2px groove;
+    margin-top: 80px;
+    height: 160px;
+}
+
+.active {
+    color: red;
+}
