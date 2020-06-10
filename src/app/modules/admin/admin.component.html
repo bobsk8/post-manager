@@ -4,7 +4,7 @@
             <h4>Página administrativa</h4>
         </div>
     </div>
-    <app-modal></app-modal>
+    <app-modal (yesAction)="removeEmployee($event)"></app-modal>
     <div class="row">        
         <div class="col-sm-8">
             <form #fEmployee="ngForm" [formGroup]="employeeForm" (submit)="ngSubmit(fEmployee)">
@@ -52,11 +52,11 @@
                 </div>
             </form>
             <div class="row">
-                <div class="col-sm" *ngIf="!employees">
-                    <app-spinner *ngIf="isLoading"></app-spinner>
+                <div class="col-sm" *ngIf="isLoading">
+                    <app-spinner></app-spinner>
                 </div>
                 <div class="col-sm" *ngIf="employees">
-                    <app-employee-list class="list-group" [employees]="employees"></app-employee-list>
+                    <app-employee-list (editEmployee)="edit($event)" (deleteEmployee)="delete($event)" class="list-group" [employees]="employees"></app-employee-list>
                 </div>
             </div>            
         </div>

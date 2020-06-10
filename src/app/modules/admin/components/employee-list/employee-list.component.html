@@ -4,18 +4,24 @@
 <table class="table table-dark">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Username</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Role</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let employee of employees">
-        <th scope="row">1</th>
+        <th scope="row">{{employee.id}}</th>
+        <td>{{employee.name}}</td>
         <td>{{employee.username}}</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <td>{{employee.phone}}</td>
+        <td>{{employee.role}}</td>
+        <td><button class="btn btn-primary" (click)="edit(employee)">Edit</button></td>
+        <td><button class="btn btn-danger" (click)="delete(employee)">Delete</button></td>
       </tr>      
     </tbody>
   </table>

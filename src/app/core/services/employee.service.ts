@@ -33,6 +33,16 @@ export class EmployeeService {
       );
   }
 
+  delete(id: number): Observable<Post> {
+    return this.http.delete<Post>(`${this.url}/api/employees/${id}`, httpOptions)
+      .pipe(
+        catchError(err => {
+          console.log('delete error: ', err);
+          return throwError(err);
+        })
+      );
+  }
+
   getAll(): Observable<Post[]> {
     return this.http.get<any>(`${this.url}/api/employees`, httpOptions)
       .pipe(

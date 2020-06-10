@@ -15,7 +15,7 @@ export class ModalService {
 
   openErrorModal(message: string): void {
     $('#errorModal').modal('show').on('shown.bs.modal', () => {
-      $(`<p>${message}</p>`).appendTo('#message');
+      $(`<p>${message}</p>`).appendTo('#errorMessage');
     });
   }
 }

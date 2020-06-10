@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SubSink } from 'subsink';
 import { EmployeeService } from 'src/app/core/services/employee.service';
@@ -10,7 +10,7 @@ import { ModalService } from 'src/app/core/services/modal.service';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
 
   isLoading = false;
@@ -30,6 +30,7 @@ export class AdminComponent implements OnInit {
 
   createForm(): FormGroup {
     return this.fb.group({
+      id: ['', ],
       username: ['', [Validators.required, Validators.pattern('[\\w-_]+')]],
       phone: ['', Validators.required],
       role: ['', Validators.required],
@@ -68,6 +69,29 @@ export class AdminComponent implements OnInit {
         this.employees = resp;
         this.isLoading = false;
       }, erro => this.isLoading = false);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
+
+  edit(employee: Employee): void {
+    this.employeeForm.setValue(employee);
+  }
+
+  delete(employee: Employee): void {
+    if (confirm(`Are you sure you will remove the user: ${employee.username}?`)) {
+      this.removeEmployee(employee.id);
+    }
+  }
+
+  removeEmployee(id: number): void {
+    this.isLoading = true;
+    this.employeeService.delete(id)
+    .subscribe(() => {
+      this.getEmployee();
+      this.isLoading = false;
+    }, error => this.isLoading = false);
   }
 
 }
