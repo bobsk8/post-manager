@@ -17,6 +17,10 @@
     height: 160px;
 }
 
+.btn:focus {
+    box-shadow: none;
+}
+
 .active {
     color: red;
 }

@@ -46,10 +46,18 @@
                 </div>
                 <div class="row">
                     <div class="col-sm">
-                        <button class="btn btn-primary">Enviar</button>
+                        <button class="btn btn-primary">Save</button>
                     </div>                    
                 </div>
-            </form>            
+            </form>
+            <div class="row">
+                <div class="col-sm" *ngIf="!employees">
+                    <app-spinner></app-spinner>
+                </div>
+                <div class="col-sm" *ngIf="employees">
+                    <app-employee-list class="list-group" [employees]="employees"></app-employee-list>
+                </div>
+            </div>            
         </div>
     </div>
 </div>

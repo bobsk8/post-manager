@@ -2,13 +2,13 @@
     <div class="row">
         <div class="col-sm-2 menu-content">
             <div class="row menu-link">
-                <div class="col-sm" routerLinkActive="active">
-                    <a class="btn" routerLink="/">Post</a>
+                <div class="col-sm">
+                    <a class="btn" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="/">Post</a>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm menu-link" routerLinkActive="active">
-                    <a class="btn" routerLink="/admin">Admin</a>
+                <div class="col-sm menu-link">
+                    <a class="btn" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="/admin">Admin</a>
                 </div>
             </div>
         </div>

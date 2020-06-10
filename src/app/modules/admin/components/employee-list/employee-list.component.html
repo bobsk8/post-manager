@@ -1,0 +1,21 @@
+<!-- <ul class="list-group list-group-flush">
+    <li *ngFor="let employee of employees" class="list-group-item">{{employee.username}}</li>
+</ul> -->
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <th scope="row">1</th>
+        <td>{{employee.username}}</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>      
+    </tbody>
+  </table>
