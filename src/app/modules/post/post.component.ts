@@ -14,7 +14,7 @@ import { ModalService } from 'src/app/core/services/modal.service';
 export class PostComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
 
-  isShow = false;
+  isLoading = false;
   submitted = false;
   posts: Post[];
   postForm: FormGroup;
@@ -61,8 +61,12 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   getPosts(): void {
+    this.isLoading = true;
     this.subs.sink = this.postService.getAll()
-      .subscribe(resp => this.posts = resp);
+      .subscribe(resp => {
+        this.posts = resp;
+        this.isLoading = false;
+      }, err => this.isLoading = false);
   }
 
   ngOnDestroy(): void {

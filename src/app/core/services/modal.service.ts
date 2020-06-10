@@ -10,8 +10,12 @@ export class ModalService {
   constructor() { }
 
   openSuccessModal(): void {
-    $('#successModal').modal('show').on('shown.bs.modal', () => {
-      $('#submit').trigger('focus');
+    $('#successModal').modal('show').on('shown.bs.modal', () => {});
+  }
+
+  openErrorModal(message: string): void {
+    $('#errorModal').modal('show').on('shown.bs.modal', () => {
+      $(`<p>${message}</p>`).appendTo('#message');
     });
   }
 }

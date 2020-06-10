@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SubSink } from 'subsink';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import { Employee } from 'src/app/models/employee';
+import { ModalService } from 'src/app/core/services/modal.service';
 
 @Component({
   selector: 'app-admin',
@@ -10,14 +11,16 @@ import { Employee } from 'src/app/models/employee';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-
   private subs = new SubSink();
+
+  isLoading = false;
   employees: Employee[];
   employeeForm: FormGroup;
   submitted = false;
   constructor(
     private fb: FormBuilder,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -48,6 +51,7 @@ export class AdminComponent implements OnInit {
       .subscribe(() => {
         this.clearForm(form);
         this.getEmployee();
+        this.modalService.openSuccessModal();
       });
   }
 
@@ -58,8 +62,12 @@ export class AdminComponent implements OnInit {
   }
 
   getEmployee(): void {
+    this.isLoading = true;
     this.subs.sink = this.employeeService.getAll()
-      .subscribe(resp => this.employees = resp);
+      .subscribe(resp => {
+        this.employees = resp;
+        this.isLoading = false;
+      }, erro => this.isLoading = false);
   }
 
 }

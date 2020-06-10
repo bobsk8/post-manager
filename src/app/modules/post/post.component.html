@@ -24,7 +24,7 @@
             </form>
             <div class="row">
                 <div class="col-sm" *ngIf="!posts">
-                    <app-spinner></app-spinner>
+                    <app-spinner *ngIf="isLoading"></app-spinner>
                 </div>
                 <div class="col-sm" *ngIf="posts">
                     <app-post-list class="list-group" [posts]="posts"></app-post-list>
