@@ -4,6 +4,7 @@
             <h4>Página inicial</h4>
         </div>
     </div>
+    <app-modal></app-modal>
     <div class="row">
         <div class="col-sm">
             <form #fPost="ngForm" [formGroup]="postForm" (submit)="ngSubmit(fPost)">
@@ -17,7 +18,7 @@
                         </app-error-message>
                     </div>
                     <div class="col-sm">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </form>

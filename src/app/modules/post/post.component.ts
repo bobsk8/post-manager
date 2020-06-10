@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostService } from 'src/app/core/services/post.service';
-import { Observable } from 'rxjs';
 import { SubSink } from 'subsink';
 
 import { Post } from 'src/app/models/post';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalService } from 'src/app/core/services/modal.service';
 
 @Component({
   selector: 'app-post',
@@ -14,13 +14,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PostComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
 
+  isShow = false;
   submitted = false;
   posts: Post[];
   postForm: FormGroup;
 
   constructor(
     private postService: PostService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class PostComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.clearForm(form);
         this.getPosts();
+        this.modalService.openSuccessModal();
       });
   }
 
