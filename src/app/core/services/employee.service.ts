@@ -71,4 +71,8 @@ export class EmployeeService {
         })
       );
   }
+
+  getEmployeeSession(): Employee {
+    return JSON.parse(sessionStorage.getItem('loggedUser'));
+  }
 }

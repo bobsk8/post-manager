@@ -4,5 +4,6 @@
   </h5>
   <div class="card-body">
     <p class="card-text">{{post.description}}</p>
+    <i class="far fa-edit" *ngIf="canEdit(post.employeeId)" (click)="edit(post)"></i>
   </div>
 </div>

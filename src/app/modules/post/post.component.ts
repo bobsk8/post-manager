@@ -32,7 +32,10 @@ export class PostComponent implements OnInit, OnDestroy {
 
   createForm(): FormGroup {
     return this.fb.group({
-      description: ['', [ Validators.required, Validators.maxLength(140)]]
+      id: [, ],
+      description: ['', [ Validators.required, Validators.maxLength(140) ]],
+      employee: [, ],
+      employeeId: [, ]
     });
   }
 
@@ -42,11 +45,24 @@ export class PostComponent implements OnInit, OnDestroy {
       return;
     }
     const post = Object.assign(new Post(), form.value);
-    this.save(post, form);
+    if (post.id) {
+      this.updatePost(post, form);
+    } else {
+      this.savePost(post, form);
+    }
   }
 
-  save(post: Post, form: any): void {
+  savePost(post: Post, form: any): void {
     this.subs.sink = this.postService.save(post)
+      .subscribe(() => {
+        this.clearForm(form);
+        this.getPosts();
+        this.modalService.openSuccessModal();
+      });
+  }
+
+  updatePost(post: Post, form: any): void {
+    this.subs.sink = this.postService.update(post)
       .subscribe(() => {
         this.clearForm(form);
         this.getPosts();
@@ -67,6 +83,10 @@ export class PostComponent implements OnInit, OnDestroy {
         this.posts = resp;
         this.isLoading = false;
       }, err => this.isLoading = false);
+  }
+
+  edit(post: Post): void {
+    this.postForm.setValue(post);
   }
 
   ngOnDestroy(): void {

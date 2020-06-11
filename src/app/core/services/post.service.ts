@@ -34,6 +34,16 @@ export class PostService {
       );
   }
 
+  update(post: Post): Observable<Post> {
+    return this.http.put<Post>(`${this.url}/api/posts/${post.id}`, post, httpOptions)
+      .pipe(
+        catchError(err => {
+          console.log('login error: ', err);
+          return throwError(err);
+        })
+      );
+  }
+
   getAll(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.url}/api/posts`, httpOptions)
       .pipe(

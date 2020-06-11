@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Post } from 'src/app/models/post';
 import { Employee } from 'src/app/models/employee';
+import { EmployeeService } from 'src/app/core/services/employee.service';
 
 declare var $: any;
 @Component({
@@ -10,25 +11,32 @@ declare var $: any;
   styleUrls: ['./post-list.component.css']
 })
 export class PostListComponent implements OnInit {
-
+  @Output() editPost = new EventEmitter<Post>();
   @Input() posts: Post[];
-  constructor() { }
+  constructor(
+    private employeeService: EmployeeService
+  ) { }
 
   ngOnInit() {
-    $(document).ready(function(){
+    $(document).ready(() => {
       $('[data-toggle="tooltip"]').tooltip();
     });
+  }
+
+  edit(post: Post): void {
+    this.editPost.emit(post);
   }
 
   formatInfo(employee: Employee): string {
     if (!employee) {
       return '';
     }
-    return `
-    Name: ${employee.name}, 
-    Username: @${employee.username}, 
-    Phone: ${employee.phone}, 
-    Role: ${employee.role}`;
+    return `Name: ${employee.name}, Username: @${employee.username}, Phone: ${employee.phone}, Role: ${employee.role}`;
+  }
+
+  canEdit(id: number): boolean {
+    const employeeLogged = this.employeeService.getEmployeeSession();
+    return employeeLogged.id === id;
   }
 
 }
