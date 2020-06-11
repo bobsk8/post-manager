@@ -17,3 +17,8 @@
     width: 690px;
     height: 1vh;
 }
+
+.spinner-control {
+    position: absolute;
+    z-index: 10;
+}

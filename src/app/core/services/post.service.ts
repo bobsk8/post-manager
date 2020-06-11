@@ -22,7 +22,7 @@ export class PostService {
     private http: HttpClient
   ) { }
 
-  save(post: Post): Observable<Post> {
+  save(post: Post): Observable<Post> {    
     return this.http.post<Post>(`${this.url}/api/posts`, post, httpOptions)
     .pipe(
       catchError(err => {

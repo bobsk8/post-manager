@@ -10,9 +10,9 @@ export class DataService implements InMemoryDbService {
 
   createDb() {
     const posts = [
-      { id: 1, description: 'Texto 1', employee: 'Rodrigo' },
-      { id: 2, description: 'Texto 2', employee: 'Lilian' },
-      { id: 3, description: 'Texto 3', employee: 'Samuel' },
+      { id: 1, description: 'Texto 1', username: 'mathilde' },
+      { id: 2, description: 'Texto 2', username: 'alia' },
+      { id: 3, description: 'Texto 3', username: 'freeman' },
     ];
 
     const employees = [

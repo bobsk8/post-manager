@@ -1,4 +1,6 @@
 .spinner-border {
     margin-top: 40px;
     margin-left: 200px;
+    width: 5rem; 
+    height: 5rem;
 }

@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { Post } from 'src/app/models/post';
 import { Employee } from 'src/app/models/employee';
+import { DataService } from './data.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,11 +21,24 @@ export class EmployeeService {
 
   url = environment.apiEndPoint;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private dataService: DataService
   ) { }
 
   save(employee: Employee): Observable<Post> {
+    console.log(this.dataService);
     return this.http.post<Post>(`${this.url}/api/employees`, employee, httpOptions)
+      .pipe(
+        catchError(err => {
+          console.log('save error: ', err);
+          return throwError(err);
+        })
+      );
+  }
+
+  update(employee: Employee): Observable<Post> {
+    console.log(this.dataService);
+    return this.http.put<Post>(`${this.url}/api/employees/${employee.id}`, employee, httpOptions)
       .pipe(
         catchError(err => {
           console.log('save error: ', err);
@@ -44,7 +58,7 @@ export class EmployeeService {
   }
 
   getAll(): Observable<Post[]> {
-    return this.http.get<any>(`${this.url}/api/employees`, httpOptions)
+    return this.http.get<Post[]>(`${this.url}/api/employees`, httpOptions)
       .pipe(
         catchError(err => {
           console.log('getAll error: ', err);
@@ -53,4 +67,13 @@ export class EmployeeService {
       );
   }
 
+  getByUsername(): Observable<Post> {
+    return this.http.get<Post>(`${this.url}/api/employees?username=mathilde`, httpOptions)
+      .pipe(
+        catchError(err => {
+          console.log('getAll error: ', err);
+          return throwError(err);
+        })
+      );
+  }
 }

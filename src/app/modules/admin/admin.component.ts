@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   createForm(): FormGroup {
     return this.fb.group({
-      id: ['', ],
+      id: [, ],
       username: ['', [Validators.required, Validators.pattern('[\\w-_]+')]],
       phone: ['', Validators.required],
       role: ['', Validators.required],
@@ -43,12 +43,25 @@ export class AdminComponent implements OnInit, OnDestroy {
     if (!form.valid) {
       return;
     }
-    const post = Object.assign(new Employee(), form.value);
-    this.save(post, form);
+    const employee = Object.assign(new Employee(), form.value);
+    if (employee.id) {
+      this.update(employee, form);
+    } else {
+      this.save(employee, form);
+    }
   }
 
   save(employee: Employee, form: any): void {
     this.subs.sink = this.employeeService.save(employee)
+      .subscribe(() => {
+        this.clearForm(form);
+        this.getEmployee();
+        this.modalService.openSuccessModal();
+      });
+  }
+
+  update(employee: Employee, form: any): void {
+    this.subs.sink = this.employeeService.update(employee)
       .subscribe(() => {
         this.clearForm(form);
         this.getEmployee();
