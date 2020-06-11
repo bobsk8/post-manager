@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { InMemoryDbService, STATUS, ResponseOptions, RequestInfo } from 'angular-in-memory-web-api';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,29 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 export class DataService implements InMemoryDbService {
 
   constructor() { }
+
+  private post(requestInfo: RequestInfo) {
+    const collectionName = requestInfo.collectionName;
+    if (collectionName === 'posts') {
+      this.setUsernameInPost(requestInfo);
+    } else if (collectionName === 'employees') {
+      this.testUsername(requestInfo);
+    }
+  }
+
+  private setUsernameInPost(requestInfo: RequestInfo): void {
+    const data = requestInfo.utils.getJsonBody(requestInfo.req);
+    data.username = 'bobsk8';
+  }
+
+  private testUsername(requestInfo: RequestInfo) {
+    const data = requestInfo.utils.getJsonBody(requestInfo.req);
+    const collection = requestInfo.collection;
+    const test = collection.some(c => c.username === data.username);
+    if (test) {
+      throw new Error('User already exists');
+    }
+  }
 
   createDb() {
     const posts = [
@@ -20,7 +43,7 @@ export class DataService implements InMemoryDbService {
       { id: 2, username: 'alia', phone: '986733455', role: 'Designer', name: 'Alia Ginder' },
       { id: 3, username: 'freeman', phone: '971232343', role: 'Developer', name: 'Freeman Litten' },
       { id: 4, username: 'piedad', phone: '992362345', role: 'Sales', name: 'Piedad Dewald' },
-      { id: 5, username: 'beau', phone: '912342303', role: 'PR', name: 'Beau Siegel' },
+      { id: 5, username: 'bobsk8', phone: '912342303', role: 'PR', name: 'Rodrigo Prado' },
     ];
 
     return { posts, employees };

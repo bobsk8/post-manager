@@ -25,8 +25,7 @@ export class EmployeeService {
     private dataService: DataService
   ) { }
 
-  save(employee: Employee): Observable<Post> {
-    console.log(this.dataService);
+  save(employee: Employee): Observable<Post> {    
     return this.http.post<Post>(`${this.url}/api/employees`, employee, httpOptions)
       .pipe(
         catchError(err => {
@@ -36,8 +35,7 @@ export class EmployeeService {
       );
   }
 
-  update(employee: Employee): Observable<Post> {
-    console.log(this.dataService);
+  update(employee: Employee): Observable<Post> {    
     return this.http.put<Post>(`${this.url}/api/employees/${employee.id}`, employee, httpOptions)
       .pipe(
         catchError(err => {

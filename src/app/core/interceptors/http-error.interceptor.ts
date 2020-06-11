@@ -22,7 +22,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                     if (error.error instanceof ErrorEvent) {
                         errorMessage = `Error: ${error.error.message}`;
                     } else {
-                        errorMessage = error.body.error;
+                        errorMessage = error.body ? error.body.error : error;
                     }
                     this.openErrorDialog(errorMessage);
                     return throwError(errorMessage);
