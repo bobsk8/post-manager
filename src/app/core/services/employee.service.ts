@@ -4,7 +4,6 @@ import { catchError } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { Observable, throwError } from 'rxjs';
-import { Post } from 'src/app/models/post';
 import { Employee } from 'src/app/models/employee';
 
 const httpOptions = {
@@ -18,13 +17,13 @@ const httpOptions = {
 })
 export class EmployeeService {
 
-  url = environment.apiEndPoint;
+  private url = environment.apiEndPoint;
   constructor(
     private http: HttpClient
   ) { }
 
-  save(employee: Employee): Observable<Post> {
-    return this.http.post<Post>(`${this.url}/api/employees`, employee, httpOptions)
+  save(employee: Employee): Observable<Employee> {
+    return this.http.post<Employee>(`${this.url}/api/employees`, employee, httpOptions)
       .pipe(
         catchError(err => {
           console.log('save error: ', err);
@@ -33,8 +32,8 @@ export class EmployeeService {
       );
   }
 
-  update(employee: Employee): Observable<Post> {
-    return this.http.put<Post>(`${this.url}/api/employees/${employee.id}`, employee, httpOptions)
+  update(employee: Employee): Observable<Employee> {
+    return this.http.put<Employee>(`${this.url}/api/employees/${employee.id}`, employee, httpOptions)
       .pipe(
         catchError(err => {
           console.log('save error: ', err);
@@ -43,8 +42,8 @@ export class EmployeeService {
       );
   }
 
-  delete(id: number): Observable<Post> {
-    return this.http.delete<Post>(`${this.url}/api/employees/${id}`, httpOptions)
+  delete(id: number): Observable<Employee> {
+    return this.http.delete<Employee>(`${this.url}/api/employees/${id}`, httpOptions)
       .pipe(
         catchError(err => {
           console.log('delete error: ', err);
@@ -53,8 +52,8 @@ export class EmployeeService {
       );
   }
 
-  getAll(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.url}/api/employees`, httpOptions)
+  getAll(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.url}/api/employees`, httpOptions)
       .pipe(
         catchError(err => {
           console.log('getAll error: ', err);
@@ -63,8 +62,8 @@ export class EmployeeService {
       );
   }
 
-  getById(id: number): Observable<Post> {
-    return this.http.get<Post>(`${this.url}/api/employees/${id}`, httpOptions)
+  getById(id: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.url}/api/employees/${id}`, httpOptions)
       .pipe(
         catchError(err => {
           console.log('getAll error: ', err);

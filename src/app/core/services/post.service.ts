@@ -18,7 +18,7 @@ const httpOptions = {
 })
 export class PostService {
 
-  url = environment.apiEndPoint;
+  private url = environment.apiEndPoint;
   constructor(
     private http: HttpClient,
     private employeeService: EmployeeService

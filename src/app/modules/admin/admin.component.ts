@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SubSink } from 'subsink';
+
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import { Employee } from 'src/app/models/employee';
 import { ModalService } from 'src/app/core/services/modal.service';
@@ -84,10 +85,6 @@ export class AdminComponent implements OnInit, OnDestroy {
       }, erro => this.isLoading = false);
   }
 
-  ngOnDestroy(): void {
-    this.subs.unsubscribe();
-  }
-
   edit(employee: Employee): void {
     this.employeeForm.setValue(employee);
   }
@@ -105,6 +102,10 @@ export class AdminComponent implements OnInit, OnDestroy {
       this.getEmployee();
       this.isLoading = false;
     }, error => this.isLoading = false);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
 }
