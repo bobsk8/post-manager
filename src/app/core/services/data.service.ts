@@ -53,7 +53,7 @@ export class DataService implements InMemoryDbService {
     }
   }
 
-  // Create Fake DB
+  // Create Faker DB
   createDb() {
     const posts = [
       {

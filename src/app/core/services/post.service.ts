@@ -24,32 +24,32 @@ export class PostService {
     private employeeService: EmployeeService
   ) { }
 
-  save(post: Post): Observable<Post> {
+  public save(post: Post): Observable<Post> {
     return this.http.post<Post>(`${this.url}/api/posts`, post, httpOptions)
       .pipe(
         catchError(err => {
-          console.log('login error: ', err);
+          console.log('EmployeeService save error: ', err);
           return throwError(err);
         })
       );
   }
 
-  update(post: Post): Observable<Post> {
+  public update(post: Post): Observable<Post> {
     return this.http.put<Post>(`${this.url}/api/posts/${post.id}`, post, httpOptions)
       .pipe(
         catchError(err => {
-          console.log('login error: ', err);
+          console.log('EmployeeService update error: ', err);
           return throwError(err);
         })
       );
   }
 
-  getAll(): Observable<Post[]> {
+  public getAll(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.url}/api/posts`, httpOptions)
       .pipe(
         map(posts => this.setUsername(posts)),
         catchError(err => {
-          console.log('login error: ', err);
+          console.log('EmployeeService getAll error: ', err);
           return throwError(err);
         })
       );

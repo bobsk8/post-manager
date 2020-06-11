@@ -22,57 +22,57 @@ export class EmployeeService {
     private http: HttpClient
   ) { }
 
-  save(employee: Employee): Observable<Employee> {
+  public save(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(`${this.url}/api/employees`, employee, httpOptions)
       .pipe(
         catchError(err => {
-          console.log('save error: ', err);
+          console.log('EmployeeService save error: ', err);
           return throwError(err);
         })
       );
   }
 
-  update(employee: Employee): Observable<Employee> {
+  public update(employee: Employee): Observable<Employee> {
     return this.http.put<Employee>(`${this.url}/api/employees/${employee.id}`, employee, httpOptions)
       .pipe(
         catchError(err => {
-          console.log('save error: ', err);
+          console.log('EmployeeService update error: ', err);
           return throwError(err);
         })
       );
   }
 
-  delete(id: number): Observable<Employee> {
+  public delete(id: number): Observable<Employee> {
     return this.http.delete<Employee>(`${this.url}/api/employees/${id}`, httpOptions)
       .pipe(
         catchError(err => {
-          console.log('delete error: ', err);
+          console.log('EmployeeService delete error: ', err);
           return throwError(err);
         })
       );
   }
 
-  getAll(): Observable<Employee[]> {
+  public getAll(): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${this.url}/api/employees`, httpOptions)
       .pipe(
         catchError(err => {
-          console.log('getAll error: ', err);
+          console.log('EmployeeService getAll error: ', err);
           return throwError(err);
         })
       );
   }
 
-  getById(id: number): Observable<Employee> {
+  public getById(id: number): Observable<Employee> {
     return this.http.get<Employee>(`${this.url}/api/employees/${id}`, httpOptions)
       .pipe(
         catchError(err => {
-          console.log('getAll error: ', err);
+          console.log('EmployeeService getById error: ', err);
           return throwError(err);
         })
       );
   }
 
-  getEmployeeSession(): Employee {
+  public getEmployeeSession(): Employee {
     return JSON.parse(sessionStorage.getItem('loggedUser'));
   }
 }

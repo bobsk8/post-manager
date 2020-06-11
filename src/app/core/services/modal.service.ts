@@ -9,11 +9,11 @@ export class ModalService {
 
   constructor() { }
 
-  openSuccessModal(): void {
+  public openSuccessModal(): void {
     $('#successModal').modal('show').on('shown.bs.modal', () => {});
   }
 
-  openErrorModal(message: string): void {
+  public openErrorModal(message: string): void {
     $('#errorModal').modal('show').on('shown.bs.modal', () => {
       $(`<p>${message}</p>`).appendTo('#errorMessage');
     });
