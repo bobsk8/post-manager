@@ -32,7 +32,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
   createForm(): FormGroup {
     return this.fb.group({
-      description: ['', Validators.required]
+      description: ['', [ Validators.required, Validators.maxLength(140)]]
     });
   }
 

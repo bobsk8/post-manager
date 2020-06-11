@@ -10,6 +10,7 @@ export class ErrorMessageComponent implements OnInit {
   @Input() haveErrors = false;
   @Input() isRequired = false;
   @Input() havePattern = false;
+  @Input() haveMaxLength = false;
   @Input() type = '';
   constructor() { }
 

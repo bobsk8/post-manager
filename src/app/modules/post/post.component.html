@@ -12,9 +12,12 @@
                     <div class="col-sm">
                         <label for="description">Text</label>
                         <textarea formControlName="description" class="form-control" name="description" id="description"
-                            cols="30" rows="10"></textarea>
-                        <app-error-message [haveErrors]="postForm.get('description')?.errors && submitted"
-                            [isRequired]="postForm.get('description')?.errors?.required" [type]="'text'">
+                            cols="30" rows="10" placeholder="limit 140 characters"></textarea>
+                        <app-error-message 
+                            [haveErrors]="postForm.get('description')?.errors && submitted"
+                            [isRequired]="postForm.get('description')?.errors?.required"
+                            [haveMaxLength]="postForm.get('description')?.errors?.maxlength"
+                            [type]="'text'">
                         </app-error-message>
                     </div>
                     <div class="col-sm">
