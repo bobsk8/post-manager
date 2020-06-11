@@ -14,7 +14,7 @@ export class DataService implements InMemoryDbService {
     if (collectionName === 'posts') {
       this.setEmployeerIdInPost(requestInfo);
     } else if (collectionName === 'employees') {
-      this.testUsernamePost(requestInfo);
+      this.testSamePhonePost(requestInfo);
     }
   }
 
@@ -22,7 +22,7 @@ export class DataService implements InMemoryDbService {
   private put(requestInfo: RequestInfo): void {
     const collectionName = requestInfo.collectionName;
     if (collectionName === 'employees') {
-      this.testUsernamePut(requestInfo);
+      this.testSamePhonePut(requestInfo);
     }
   }
 
@@ -33,21 +33,21 @@ export class DataService implements InMemoryDbService {
     data.employeeId = 5;
   }
 
-  // Verify same username when create
-  private testUsernamePost(requestInfo: RequestInfo): void {
+  // Verify same Phone when create
+  private testSamePhonePost(requestInfo: RequestInfo): void {
     const data = requestInfo.utils.getJsonBody(requestInfo.req);
     const collection = requestInfo.collection;
-    const test = collection.some(c => c.username === data.username);
+    const test = collection.some(c => c.pnone === data.pnone);
     if (test) {
-      throw new Error('User already exists');
+      throw new Error('Phone already exists');
     }
   }
 
   // Verify same username when update
-  private testUsernamePut(requestInfo: RequestInfo): void {
+  private testSamePhonePut(requestInfo: RequestInfo): void {
     const data = requestInfo.utils.getJsonBody(requestInfo.req);
     const collection = requestInfo.collection;
-    const test = collection.some(c => (c.username === data.username && c.id !== data.id));
+    const test = collection.some(c => (c.phone === data.phone && c.id !== data.id));
     if (test) {
       throw new Error('User already exists');
     }
