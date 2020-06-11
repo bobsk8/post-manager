@@ -3,16 +3,12 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
-import { ModalService } from '../services/modal.service';
-
 @Injectable({
     providedIn: 'root'
 })
 export class HttpErrorInterceptor implements HttpInterceptor {
 
-    constructor(
-        private modalService: ModalService
-    ) { }
+    constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request)
@@ -31,7 +27,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     }
 
     openErrorDialog(message: any): void {
-        this.modalService.openErrorModal(message);
+        alert(message);
     }
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { InMemoryDbService, STATUS, ResponseOptions, RequestInfo } from 'angular-in-memory-web-api';
+import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api';
 
 @Injectable({
   providedIn: 'root'
@@ -8,21 +8,33 @@ export class DataService implements InMemoryDbService {
 
   constructor() { }
 
-  private post(requestInfo: RequestInfo) {
+  // Post Interceptor
+  private post(requestInfo: RequestInfo): void {
     const collectionName = requestInfo.collectionName;
     if (collectionName === 'posts') {
-      this.setUsernameInPost(requestInfo);
+      this.setEmployeerIdInPost(requestInfo);
     } else if (collectionName === 'employees') {
-      this.testUsername(requestInfo);
+      this.testUsernamePost(requestInfo);
     }
   }
 
-  private setUsernameInPost(requestInfo: RequestInfo): void {
-    const data = requestInfo.utils.getJsonBody(requestInfo.req);
-    data.username = 'bobsk8';
+  // Put Interceptor
+  private put(requestInfo: RequestInfo): void {
+    const collectionName = requestInfo.collectionName;
+    if (collectionName === 'employees') {
+      this.testUsernamePut(requestInfo);
+    }
   }
 
-  private testUsername(requestInfo: RequestInfo) {
+  // Set Employer currently logged
+  // For testing always use id 1
+  private setEmployeerIdInPost(requestInfo: RequestInfo): void {
+    const data = requestInfo.utils.getJsonBody(requestInfo.req);
+    data.employeeId = 5;
+  }
+
+  // Verify same username when create
+  private testUsernamePost(requestInfo: RequestInfo): void {
     const data = requestInfo.utils.getJsonBody(requestInfo.req);
     const collection = requestInfo.collection;
     const test = collection.some(c => c.username === data.username);
@@ -31,11 +43,22 @@ export class DataService implements InMemoryDbService {
     }
   }
 
+  // Verify same username when update
+  private testUsernamePut(requestInfo: RequestInfo): void {
+    const data = requestInfo.utils.getJsonBody(requestInfo.req);
+    const collection = requestInfo.collection;
+    const test = collection.some(c => (c.username === data.username && c.id !== data.id));
+    if (test) {
+      throw new Error('User already exists');
+    }
+  }
+
+  // Create Fake DB
   createDb() {
     const posts = [
-      { id: 1, description: 'Texto 1', username: 'mathilde' },
-      { id: 2, description: 'Texto 2', username: 'alia' },
-      { id: 3, description: 'Texto 3', username: 'freeman' },
+      { id: 1, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', employeeId: 1 },
+      { id: 2, description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat', employeeId: 2 },
+      { id: 3, description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur', employeeId: 3 },
     ];
 
     const employees = [
@@ -47,6 +70,5 @@ export class DataService implements InMemoryDbService {
     ];
 
     return { posts, employees };
-
   }
 }
