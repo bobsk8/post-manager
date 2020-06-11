@@ -47,7 +47,7 @@ export class PostService {
 
   // In a real API using database the relationship will carry out this association
   private setUsername(posts: Post[]): Post[] {
-    posts.map(p => this.employeeService.getById(p.employeeId).subscribe(e => p.username = e.username));
+    posts.map(p => this.employeeService.getById(p.employeeId).subscribe(e => p.employee = e));
     return posts;
   }
 }
