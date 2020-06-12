@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MentionModule } from 'fvi-angular-mentions/mention';
 
 import { PostRoutingModule } from './post-routing.module';
 import { PostComponent } from './post.component';
@@ -13,6 +14,7 @@ import { PostListComponent } from './components/post-list/post-list.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MentionModule,
     PostRoutingModule,
     SharedModule
   ]

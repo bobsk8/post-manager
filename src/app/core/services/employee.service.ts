@@ -72,6 +72,16 @@ export class EmployeeService {
       );
   }
 
+  public getByUsername(username: string): Observable<Employee> {
+    return this.http.get<Employee>(`${this.url}/api/employees/?username=${username}`, httpOptions)
+      .pipe(
+        catchError(err => {
+          console.log('EmployeeService getById error: ', err);
+          return throwError(err);
+        })
+      );
+  }
+
   public getEmployeeSession(): Employee {
     return JSON.parse(sessionStorage.getItem('loggedUser'));
   }

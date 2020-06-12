@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostService } from 'src/app/core/services/post.service';
 import { SubSink } from 'subsink';
+import { MentionItem } from 'fvi-angular-mentions/mention';
 
 import { Post } from 'src/app/models/post';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalService } from 'src/app/core/services/modal.service';
+import { EmployeeService } from 'src/app/core/services/employee.service';
 
 @Component({
   selector: 'app-post',
@@ -13,6 +15,15 @@ import { ModalService } from 'src/app/core/services/modal.service';
 })
 export class PostComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
+  mentionItems: Array<MentionItem> = [{
+    items: [],
+    triggerChar: '@',
+  },
+  {
+    items: [],
+    triggerChar: '#',
+  }];
+  employees = [];
 
   isLoading = false;
   submitted = false;
@@ -21,6 +32,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
   constructor(
     private postService: PostService,
+    private employeeService: EmployeeService,
     private fb: FormBuilder,
     private modalService: ModalService
   ) { }
@@ -28,12 +40,13 @@ export class PostComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.postForm = this.createForm();
     this.getPosts();
+    this.initAutoComplete();
   }
 
   createForm(): FormGroup {
     return this.fb.group({
       id: [, ],
-      description: ['', [ Validators.required, Validators.maxLength(140) ]],
+      description: ['', [Validators.required, Validators.maxLength(140)]],
       employee: [, ],
       employeeId: [, ]
     });
@@ -87,6 +100,22 @@ export class PostComponent implements OnInit, OnDestroy {
 
   edit(post: Post): void {
     this.postForm.setValue(post);
+  }
+
+  private initAutoComplete(): void {
+    this.employeeService.getAll()
+      .subscribe(employees => {
+        this.mentionItems = [
+          {
+            items: employees.map(e => e.username),
+            triggerChar: '@',
+          },
+          {
+            items: employees.map(e => e.phone),
+            triggerChar: '#',
+          }
+        ];
+      });
   }
 
   ngOnDestroy(): void {

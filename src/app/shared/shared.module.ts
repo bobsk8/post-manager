@@ -6,7 +6,6 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ModalComponent } from './components/modal/modal.component';
 
-
 @NgModule({
   declarations: [ErrorMessageComponent, SpinnerComponent, ModalComponent],
   imports: [
