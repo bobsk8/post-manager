@@ -103,7 +103,7 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   private initAutoComplete(): void {
-    this.employeeService.getAll()
+    this.subs.sink = this.employeeService.getAll()
       .subscribe(employees => {
         this.mentionItems = [
           {

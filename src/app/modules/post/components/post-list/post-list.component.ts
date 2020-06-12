@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 
 import { Post } from 'src/app/models/post';
 import { Employee } from 'src/app/models/employee';
@@ -10,7 +10,7 @@ declare var $: any;
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css']
 })
-export class PostListComponent implements OnInit {
+export class PostListComponent implements OnInit, OnDestroy {
   @Output() editPost = new EventEmitter<Post>();
   @Input() posts: Post[];
   constructor(
@@ -37,6 +37,10 @@ export class PostListComponent implements OnInit {
   canEdit(id: number): boolean {
     const employeeLogged = this.employeeService.getEmployeeSession();
     return employeeLogged.id === id;
+  }
+
+  ngOnDestroy(): void {
+    this.editPost.unsubscribe();
   }
 
 }

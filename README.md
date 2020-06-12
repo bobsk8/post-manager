@@ -1,4 +1,4 @@
-# Capture Pokémons
+# twitter clone
 
 ## Aplication
 The challenge consists of creating a simple post timeline. The posts consist of text but it can
@@ -29,12 +29,23 @@ removed from the database.
 
 ---
 
+## angular-in-memory-web-api
+An in-memory web api for Angular demos and tests that emulates CRUD operations over a RESTy API.
+
+It intercepts Angular Http and HttpClient requests that would otherwise go to the remote server and redirects them to an in-memory data store that you control.
+View more in [github](https://github.com/angular/in-memory-web-api).
+
+## subsink
+SubSink is a dead simple class to absorb RxJS subscriptions in an array.
+View more in [github](https://github.com/wardbell/subsink#readme).
+
 ## Folders organization
 
 ### Core
 
 * interceptors: http-error.interceptor - Responsible for intercept the http errors. 
-* services: Responsible for maintaining the application's global services. 
+* services: Responsible for maintaining the application's global services.
+* services/data.service.ts: Service with responsible for maintaining the database global(Look angular-in-memory-web-api).
 
 ### Models
 

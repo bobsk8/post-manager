@@ -97,7 +97,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   removeEmployee(id: number): void {
     this.isLoading = true;
-    this.employeeService.delete(id)
+    this.subs.sink = this.employeeService.delete(id)
     .subscribe(() => {
       this.getEmployee();
       this.isLoading = false;

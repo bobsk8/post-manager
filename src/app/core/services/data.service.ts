@@ -37,7 +37,7 @@ export class DataService implements InMemoryDbService {
   private testSamePhonePost(requestInfo: RequestInfo): void {
     const data = requestInfo.utils.getJsonBody(requestInfo.req);
     const collection = requestInfo.collection;
-    const test = collection.some(c => c.pnone === data.pnone);
+    const test = collection.some(c => c.phone === data.phone);
     if (test) {
       throw new Error('Phone already exists');
     }
