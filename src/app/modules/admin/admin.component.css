@@ -1,0 +1,22 @@
+.container h4 {
+    margin-bottom: 20px;
+ }
+
+ .container input {
+    border: 2px solid black;
+ }
+
+.btn-primary {
+    margin-top: 20px;
+}
+
+.list-group {
+    margin-top: 40px;
+    width: 690px;
+    height: 1vh;
+}
+
+.spinner-control {
+    position: absolute;
+    z-index: 10;
+}

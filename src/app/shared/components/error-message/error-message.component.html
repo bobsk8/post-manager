@@ -1,0 +1,11 @@
+<div class="error-msg" *ngIf="haveErrors">
+    <p class="alert alert-danger move-message-danger" *ngIf="isRequired">
+        Please, {{type}} is required
+    </p>
+    <p class="alert alert-danger move-message-danger" *ngIf="havePattern">
+        Invalid {{type}}
+    </p>
+    <p class="alert alert-danger move-message-danger" *ngIf="haveMaxLength">
+        Input limit error 
+    </p>
+</div>

@@ -1,0 +1,37 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm">
+            <h4>Initial Page</h4>
+        </div>
+    </div>
+    <app-modal></app-modal>
+    <div class="row">
+        <div class="col-sm">
+            <form #fPost="ngForm" [formGroup]="postForm" (submit)="ngSubmit(fPost)">
+                <div class="row">
+                    <div class="col-sm">                        
+                        <textarea [mentions]="mentionItems" formControlName="description" class="form-control" name="description" id="description"
+                            cols="30" rows="10" placeholder="limit 140 characters"></textarea>
+                        <app-error-message
+                            [haveErrors]="postForm.get('description')?.errors && submitted"
+                            [isRequired]="postForm.get('description')?.errors?.required"
+                            [haveMaxLength]="postForm.get('description')?.errors?.maxlength"
+                            [type]="'text'">
+                        </app-error-message>
+                    </div>
+                    <div class="col-sm">
+                        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-sm" *ngIf="!posts">
+                    <app-spinner *ngIf="isLoading"></app-spinner>
+                </div>
+                <div class="col-sm" *ngIf="posts">
+                    <app-post-list class="list-group" (editPost)="edit($event)" [posts]="posts"></app-post-list>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

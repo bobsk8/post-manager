@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h4>Administrative Page</h4>
+        </div>
+    </div>
+    <app-modal (yesAction)="removeEmployee($event)"></app-modal>
+    <div class="row">        
+        <div class="col-sm-8">
+            <form #fEmployee="ngForm" [formGroup]="employeeForm" (submit)="ngSubmit(fEmployee)">
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="username">Username</label>
+                        <input type="text" formControlName="username" class="form-control" name="username" id="username">
+                        <app-error-message [haveErrors]="employeeForm.get('username')?.errors && submitted"
+                            [isRequired]="employeeForm.get('username')?.errors?.required" [type]="'Username'"
+                            [havePattern]="employeeForm.get('username')?.errors?.pattern">
+                        </app-error-message>                        
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="phone">Phone</label>
+                        <input type="text" formControlName="phone" class="form-control" name="phone" id="phone">
+                        <app-error-message [haveErrors]="employeeForm.get('phone')?.errors && submitted"
+                            [isRequired]="employeeForm.get('phone')?.errors?.required" [type]="'Phone'">
+                        </app-error-message>
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="role">Role</label>
+                        <input type="text" formControlName="role" class="form-control" name="role" id="role">
+                        <app-error-message [haveErrors]="employeeForm.get('role')?.errors && submitted"
+                            [isRequired]="employeeForm.get('role')?.errors?.required" [type]="'Role'">
+                        </app-error-message>
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="name">Name</label>
+                        <input type="text" formControlName="name" class="form-control" name="name" id="name">
+                        <app-error-message [haveErrors]="employeeForm.get('name')?.errors && submitted"
+                            [isRequired]="employeeForm.get('name')?.errors?.required" [type]="'Name'">
+                        </app-error-message>
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <button class="btn btn-primary">Save</button>
+                    </div>                    
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-sm spinner-control" *ngIf="isLoading">
+                    <app-spinner></app-spinner>
+                </div>
+                <div class="col-sm" *ngIf="employees">
+                    <app-employee-list (editEmployee)="edit($event)" (deleteEmployee)="delete($event)" class="list-group" [employees]="employees"></app-employee-list>
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>
